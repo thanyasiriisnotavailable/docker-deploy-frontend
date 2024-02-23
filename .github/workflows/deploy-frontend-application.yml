@@ -10,34 +10,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up QEMU
+      -
+        name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
-      - name: Set up Docker Buildx
+      - 
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Login to DockerHub
+      - 
+        name: Login to DockerHub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-      - name: Prepare the docker-compose runs
+      - 
+        name: Prepare the docker-compose runs
         run: |
           ls -al
           # Add any additional preparation steps here
 
-      - name: Build and push
+      - 
+        name: Build and push
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
           tags: thanyasiriisnotavailable/234-deploylab-frontend:latest
 
-      - name: Copy file via SSH password
+      - 
+        name: Copy file via SSH password
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.HOST_SERVER }}
@@ -47,7 +54,8 @@ jobs:
           source: "docker-compose.yml"
           target: "/home/ubuntu/frontend"
 
-      - name: Docker Compose
+      - 
+        name: Docker Compose
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.HOST_SERVER }}
