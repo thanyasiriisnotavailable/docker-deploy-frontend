@@ -1,4 +1,3 @@
-[4:00 PM] TANRADA WICHIANWANNAKOOL
 name: Deploy frontend application
 'on':
   push:
